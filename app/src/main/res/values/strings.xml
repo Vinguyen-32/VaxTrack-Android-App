@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">VaxTrack</string>
+    <string name="picker">Pick image</string>
+</resources>
