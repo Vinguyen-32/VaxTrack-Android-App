@@ -71,7 +71,7 @@
                         android:text="Date of Birth" />
 
                     <TextView
-                        android:id="@+id/pi_tv_dobSel"
+                        android:id="@+id/pi_txt_dobSel"
                         style="@style/pi_txt"
                         android:layout_gravity="center"
                         android:gravity="center"
