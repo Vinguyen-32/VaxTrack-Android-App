@@ -17,8 +17,21 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.TextView;
+
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Headers;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 public class EligibleConfirmActivity extends AppCompatActivity {
     private LocationManager mLocationManager;
@@ -37,6 +50,8 @@ public class EligibleConfirmActivity extends AppCompatActivity {
 
         Button btnCon = findViewById(R.id.btnCon);
         Button btnCan = findViewById(R.id.btnCan);
+
+        ProgressBar ld_current_location = findViewById(R.id.ld_current_location);
 
         btnCan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,6 +90,7 @@ public class EligibleConfirmActivity extends AppCompatActivity {
                             new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
                             99);
                 }
+                ld_current_location.setVisibility(View.VISIBLE);
                 mLocationManager.requestLocationUpdates(provider, 400, 1, new LocationListener() {
                     @Override
                     public void onLocationChanged(@NonNull Location location) {
@@ -83,6 +99,43 @@ public class EligibleConfirmActivity extends AppCompatActivity {
                         System.out.println("Longtitude: " + location.getLongitude());
                         System.out.println("Latitude: " + location.getLatitude());
                         btnCon.setEnabled(true);
+                        ld_current_location.setVisibility(View.INVISIBLE);
+                    }
+                });
+            }
+        });
+
+        btnCon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final MediaType JSON = MediaType.get("application/json; charset=utf-8");
+
+                OkHttpClient client = new OkHttpClient();
+                    String json = "{\"location\":{\"lat\":37.296177,\"lng\":-121.847534},\"vaccineData\":\"WyJhM3F0MDAwMDAwMEN5SkJBQTAiLCJhM3F0MDAwMDAwMEN5SkdBQTAiLCJhM3F0MDAwMDAwMDFBZExBQVUiLCJhM3F0MDAwMDAwMDFBZE1BQVUiLCJhM3F0MDAwMDAwMDFBc2FBQUUiLCJhM3F0MDAwMDAwMDFBZ1VBQVUiLCJhM3F0MDAwMDAwMDFBZ1ZBQVUiXQ==\"}";
+                    String url = "http://192.168.1.28:3000/api/v1.0/search";
+                    RequestBody body = RequestBody.create(JSON, json);
+                    Request request = new Request.Builder()
+                            .url(url)
+                            .post(body)
+                            .build();
+
+
+                client.newCall(request).enqueue(new Callback() {
+                    @Override public void onFailure(Call call, IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    @Override public void onResponse(Call call, Response response) throws IOException {
+                        try (ResponseBody responseBody = response.body()) {
+                            if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+
+                            Headers responseHeaders = response.headers();
+                            for (int i = 0, size = responseHeaders.size(); i < size; i++) {
+                                System.out.println(responseHeaders.name(i) + ": " + responseHeaders.value(i));
+                            }
+
+                            System.out.println(responseBody.string());
+                        }
                     }
                 });
             }
