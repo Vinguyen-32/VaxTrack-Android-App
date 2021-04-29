@@ -22,11 +22,8 @@ import java.util.Calendar;
 public class PersonalInfo extends AppCompatActivity {
 
     private static final String TAG = "PersonalInfo";
-    EditText firstName, lastName, mobileNumber, address;
+    EditText firstName, lastName, month, day, year, gender, race, email, mobileNumber, streetAddress, city, zipcode;
     Button insert;
-    DatabaseHelper DB;
-    private TextView mDisplayDate;
-    private DatePickerDialog.OnDateSetListener mDateSetListener;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -34,35 +31,41 @@ public class PersonalInfo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_info);
 
-        firstName = findViewById(R.id.pi_txt_firstName);
-        lastName = findViewById(R.id.pi_txt_lastName);
-        mobileNumber = findViewById(R.id.pi_txt_phone);
-        address = findViewById(R.id.pi_txt_phone);
-        //dob = findViewById(R.id.pi_txt_dobSel);
+        firstName = findViewById(R.id.firstName);
+        lastName = findViewById(R.id.lastName);
+        month = findViewById(R.id.month);
+        day = findViewById(R.id.day);
+        year = findViewById(R.id.year);
+        //gender = findViewById(R.id.gender_spinner);
+        //race = findViewById(R.id.race_spinner);
+        email = findViewById(R.id.email);
+        mobileNumber = findViewById(R.id.phoneNumber);
+        streetAddress = findViewById(R.id.streetAddress);
+        city = findViewById(R.id.city);
+        zipcode = findViewById(R.id.zipCode);
 
-        insert = findViewById(R.id.pi_to_covid_button);
-        DB = new DatabaseHelper(this);
+        insert = findViewById(R.id.saveContinue_button);
 
-        insert.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String firstNameTXT = firstName.getText().toString();
-                String lastNameTXT = lastName.getText().toString();
-                String mobileNumberTXT = mobileNumber.getText().toString();
-                String addressTXT = address.getText().toString();
-                //String dobTXT = dob.getText().toString();
+//        insert.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String firstNameTXT = firstName.getText().toString();
+//                String lastNameTXT = lastName.getText().toString();
+//                String mobileNumberTXT = mobileNumber.getText().toString();
+//                String addressTXT = address.getText().toString();
+//                //String dobTXT = dob.getText().toString();
+//
+//                Boolean checkinsertdata = DB.insertuserdata(firstNameTXT, lastNameTXT, mobileNumberTXT, addressTXT, dobTXT);
+//                if (checkinsertdata == true)
+//                    Toast.makeText(PersonalInfo.this, "New Entry Inserted", Toast.LENGTH_SHORT).show();
+//                else
+//                    Toast.makeText(PersonalInfo.this, "New Entry Not Inserted", Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
-                Boolean checkinsertdata = DB.insertuserdata(firstNameTXT, lastNameTXT, mobileNumberTXT, addressTXT);
-                if (checkinsertdata == true)
-                    Toast.makeText(PersonalInfo.this, "New Entry Inserted", Toast.LENGTH_SHORT).show();
-                else
-                    Toast.makeText(PersonalInfo.this, "New Entry Not Inserted", Toast.LENGTH_SHORT).show();
-            }
-        });
 
-
-        //Gender spinner
-        Spinner dropdown = findViewById(R.id.pi_spinner_gender);
+        //Gender spinner start
+        Spinner dropdown = findViewById(R.id.gender_spinner);
         String[] items = new String[]{
                 "Select",
                 "Male",
@@ -73,9 +76,10 @@ public class PersonalInfo extends AppCompatActivity {
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
         dropdown.setAdapter(adapter);
+        //Gender spinner end
 
-        //Gender spinner
-        Spinner dropdown2 = findViewById(R.id.pi_spinner_ethnicity);
+        //Ethnicity spinner start
+        Spinner dropdown2 = findViewById(R.id.race_spinner);
         String[] items2 = new String[]{
                 "Select",
                 "American Indian or Alaska Native",
@@ -89,34 +93,7 @@ public class PersonalInfo extends AppCompatActivity {
 
         ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items2);
         dropdown2.setAdapter(adapter2);
+        //Ethnicity spinner end
 
-        //Date of birth selection
-        mDisplayDate = findViewById(R.id.pi_txt_dobSel);
-        mDisplayDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Calendar cal = Calendar.getInstance();
-                int year = cal.get(Calendar.YEAR);
-                int month = cal.get(Calendar.MONTH);
-                int day = cal.get(Calendar.DAY_OF_MONTH);
-
-                DatePickerDialog dialog = new DatePickerDialog(PersonalInfo.this,
-                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
-                        mDateSetListener,
-                        year, month, day);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));
-                dialog.show();
-            }
-        });
-
-        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int day) {
-                month = month + 1;
-                Log.d(TAG, "onDateSet: mm/dd/yyy:" + month + "/" + day + "/" + year);
-                String date = month + "/" + day + "/" + year;
-                mDisplayDate.setText(date);
-            }
-        };
     }
 }
