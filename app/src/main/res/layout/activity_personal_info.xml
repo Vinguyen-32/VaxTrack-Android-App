@@ -13,7 +13,7 @@
         tools:layout_editor_absoluteY="95dp">
 
         <TextView
-            android:id="@+id/textView9"
+            android:id="@+id/TV_personalInfoDisclaimer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/info_margin"
@@ -32,31 +32,41 @@
                 <TextView
                     android:id="@+id/TV_FirstName"
                     style="@style/TextView"
-                    android:text="First Name" />
+                    android:text="@string/first_name" />
 
                 <EditText
                     android:id="@+id/firstName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName"
+                    android:autofillHints="" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp" />
 
                 <TextView
                     android:id="@+id/TV_LastName"
                     style="@style/TextView"
-                    android:text="Last Name" />
+                    android:text="@string/last_name" />
 
                 <EditText
                     android:id="@+id/lastName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName"
+                    android:importantForAutofill="no" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp" />
 
                 <TextView
                     android:id="@+id/TV_DOB"
                     style="@style/TextView"
-                    android:text="Date of Birth" />
+                    android:text="@string/date_of_birth" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -79,12 +89,18 @@
                         style="@style/TextView_Secondary"
                         android:inputType="textPersonName"
                         android:text="Year" />
+
                 </LinearLayout>
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="10dp"
+                    android:layout_weight="1" />
 
                 <TextView
                     android:id="@+id/TV_gender"
                     style="@style/TextView"
-                    android:text="Gender" />
+                    android:text="@string/gender" />
 
                 <Spinner
                     android:id="@+id/gender_spinner"
@@ -92,12 +108,16 @@
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/btn_dropdown" />
 
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp" />
+
                 <TextView
                     android:id="@+id/TV_race"
                     style="@style/TextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Race" />
+                    android:text="@string/race" />
 
                 <Spinner
                     android:id="@+id/race_spinner"
@@ -105,66 +125,90 @@
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/btn_dropdown" />
 
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp" />
+
                 <TextView
                     android:id="@+id/TV_email"
                     style="@style/TextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Email" />
+                    android:text="@string/email" />
 
                 <EditText
                     android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:inputType="textEmailAddress" />
+                    android:inputType="textEmailAddress"
+                    android:importantForAutofill="no" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp" />
 
                 <TextView
                     android:id="@+id/TV_phoneNumber"
                     style="@style/TextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Phone Number" />
+                    android:text="@string/phone_number" />
 
                 <EditText
                     android:id="@+id/phoneNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:inputType="phone" />
+                    android:inputType="phone"
+                    android:importantForAutofill="no" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp" />
 
                 <TextView
                     android:id="@+id/TV_street"
                     style="@style/TextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Home Street Address" />
+                    android:text="@string/home_street_address" />
 
                 <EditText
                     android:id="@+id/streetAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName"
+                    android:importantForAutofill="no" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp" />
 
                 <TextView
                     android:id="@+id/TV_city"
                     style="@style/TextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="City" />
+                    android:text="@string/city" />
 
                 <EditText
                     android:id="@+id/city"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName"
+                    android:importantForAutofill="no" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp" />
 
                 <TextView
                     android:id="@+id/TV_zipCode"
                     style="@style/TextView"
-                    android:text="Zip Code" />
+                    android:text="@string/zip_code" />
 
                 <EditText
                     android:id="@+id/zipCode"
@@ -172,6 +216,10 @@
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:inputType="textPostalAddress" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
