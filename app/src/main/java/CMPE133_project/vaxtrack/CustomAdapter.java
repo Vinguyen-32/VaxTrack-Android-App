@@ -43,4 +43,16 @@ public class CustomAdapter extends ArrayAdapter<Provider> {
 
         return convertView;
     }
+
+    public void clear() {
+        providerList.clear();
+        notifyDataSetChanged();
+    }
+
+    // Add a list of items -- change to type used
+    public void addAll(List<Provider> newProviderList) {
+        providerList.addAll(newProviderList);
+        notifyDataSetChanged();
+    }
+
 }

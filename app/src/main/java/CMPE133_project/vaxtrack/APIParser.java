@@ -29,7 +29,7 @@ public class APIParser extends AsyncTask<String, String, Void> {
     // private ListView listView;
     // private double[] locationService;
     // For parsing data
-    public List<Provider> providers = new ArrayList<>();
+    public static List<Provider> providers = new ArrayList<>();
     private BufferedInputStream inputStream;
     String result = "";
 
@@ -152,4 +152,5 @@ public class APIParser extends AsyncTask<String, String, Void> {
             e.printStackTrace();
         }
     }
+
 }
