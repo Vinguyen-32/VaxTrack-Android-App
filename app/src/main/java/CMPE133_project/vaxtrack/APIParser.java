@@ -25,9 +25,9 @@ import java.util.List;
 
 public class APIParser extends AsyncTask<String, String, Void> {
 
-    private String apiUrl = "https://www.vaccinespotter.org/api/v0/states/CT.json";
-   // private ListView listView;
-   // private double[] locationService;
+    private String apiUrl = "https://www.vaccinespotter.org/api/v0/states/WY.json";
+    // private ListView listView;
+    // private double[] locationService;
     // For parsing data
     public List<Provider> providers = new ArrayList<>();
     private BufferedInputStream inputStream;
@@ -52,23 +52,28 @@ public class APIParser extends AsyncTask<String, String, Void> {
         progressDialog.dismiss();
         progressDialog.setMessage("Fetching available providers...");
         progressDialog.show();
-        progressDialog.setOnCancelListener((dialogInterface) -> {APIParser.this.cancel(true);});
+        System.out.println("Start doInBackground");
+        progressDialog.setCancelable(false);
+//        progressDialog.setOnCancelListener((dialogInterface) -> {APIParser.this.cancel(true);});
     }
 
     @Override
     protected Void doInBackground(String... strings) {
-       HttpURLConnection httpURLConnection = null;
-       try{
-           URL url = new URL(apiUrl);
-           httpURLConnection = (HttpURLConnection) url.openConnection();
-           inputStream = new BufferedInputStream(httpURLConnection.getInputStream());
-           result = readStream();
-          // result = result.substring(result.indexOf("(") + 1, result.lastIndexOf(")"));
-       } catch (MalformedURLException e) {
-           e.printStackTrace();
-       } catch (IOException e) {
-           e.printStackTrace();
-       }
+        HttpURLConnection httpURLConnection = null;
+        try{
+            URL url = new URL(apiUrl);
+            httpURLConnection = (HttpURLConnection) url.openConnection();
+            httpURLConnection.connect();
+            httpURLConnection.setRequestMethod("GET");
+            System.out.println("Connection opened.");
+            inputStream = new BufferedInputStream(httpURLConnection.getInputStream());
+            result = readStream();
+            // result = result.substring(result.indexOf("(") + 1, result.lastIndexOf(")"));
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
@@ -82,6 +87,8 @@ public class APIParser extends AsyncTask<String, String, Void> {
             }
         } catch (Exception e){
             e.printStackTrace();
+        } finally {
+            bufferedReader.close();
         }
         return stringBuilder.toString();
     }
@@ -89,6 +96,7 @@ public class APIParser extends AsyncTask<String, String, Void> {
     @Override
     protected void onPostExecute(Void aVoid) {
         try {
+            System.out.println("Start Read");
             JSONObject featureCollection = new JSONObject(result);
             if (featureCollection != null){
                 JSONArray features = featureCollection.getJSONArray("features");
@@ -103,29 +111,43 @@ public class APIParser extends AsyncTask<String, String, Void> {
                     // Parse properties
                     JSONObject properties = feature.getJSONObject("properties");
                     // Check if provider has appointments.
-                    if (properties.getBoolean("appointments_available")){
-                        String brands = "";
-                        if(properties.getJSONObject("appointment_vaccine_types").has("moderna")) {
-                            brands += "Moderna ";
+                    boolean appointmentsIsNull = properties.isNull("appointments_available_all_doses");
+                    if (!appointmentsIsNull){
+                        if(properties.getBoolean("appointments_available_all_doses")){
+                            String brands = "";
+                            if(properties.getJSONObject("appointment_vaccine_types").has("moderna")) {
+                                brands += "Moderna ";
+                            }
+                            if(properties.getJSONObject("appointment_vaccine_types").has("jj")){
+                                brands += "Johnson & Johnson ";
+                            }
+                            if(properties.getJSONObject("appointment_vaccine_types").has("pfizer")){
+                                brands += "Pfizer ";
+                            }
+                            if(brands.equals("")){
+                                brands = "Unknown";
+                            }
+                            // Create the Provider class to represent the location.
+                            Provider provider = new Provider();
+                            provider.setName(properties.getString("provider_brand_name"));
+                            provider.setAddress(properties.getString("address"));
+                            provider.setLocation(providerLocation);
+                            provider.setBrand(brands);
+                            providers.add(provider);
+                            System.out.println("Done with provider " + i);
                         }
-                        if(properties.getJSONObject("appointment_vaccine_types").has("jj")){
-                            brands += "Johnson & Johnson ";
-                        }
-                        if(properties.getJSONObject("appointment_vaccine_types").has("pfizer")){
-                            brands += "Pfizer ";
-                        }
-                        // Create the Provider class to represent the location.
-                        Provider provider = new Provider();
-                        provider.setName(properties.getString("provider_brand_name"));
-                        provider.setAddress(properties.getString("address"));
-                        provider.setLocation(providerLocation);
-                        provider.setBrand(brands);
-                        providers.add(provider);
                     }
                 }
             }
+            System.out.println("All read done.");
+            if (progressDialog.isShowing()){
+                progressDialog.dismiss();
+            }
             listView = (ListView) this.activity.findViewById(R.id.providerList);
             CustomAdapter adapter = new CustomAdapter(this.context, providers);
+            adapter.notifyDataSetChanged();
+            listView.setAdapter(adapter);
+
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -21,15 +21,24 @@ public class AvailableVaccineActivity extends AppCompatActivity {
 
 
     private ListView listView;
+    private APIParser apiParser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_providerslist);
         try{
-            APIParser apiParser = (APIParser) new APIParser(this, this).execute();
+             apiParser = (APIParser) new APIParser(this, this).execute();
         } catch (Exception e){
             e.printStackTrace();
         }
     }
+
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        apiParser.execute();
+//    }
+
+
 }
