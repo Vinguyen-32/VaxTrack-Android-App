@@ -30,9 +30,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.VaxTrack"
         android:usesCleartextTraffic="true">
-        <activity android:name=".PersonalInfo"
-            android:exported="true">
-        </activity>
+        <activity android:name=".HealthInfo"></activity>
+        <activity
+            android:name=".PersonalInfo"
+            android:exported="true"></activity>
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -44,7 +45,7 @@
                 android:resource="@xml/fileprovider" />
         </provider>
 
-        <activity android:name=".EligibleConfirmActivity"></activity>
+        <activity android:name=".EligibleConfirmActivity" />
         <activity android:name=".QuestionnaireActivity" />
         <activity android:name=".ConfirmInfoActivity" />
         <activity android:name=".MainActivity">
