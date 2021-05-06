@@ -32,13 +32,33 @@ public class CustomAdapter extends ArrayAdapter<Provider> {
         }
         TextView name = (TextView) convertView.findViewById(R.id.providerName);
         TextView address = (TextView) convertView.findViewById(R.id.providerAddress);
+        TextView cityState = (TextView) convertView.findViewById(R.id.providerCityState);
         TextView brands = (TextView) convertView.findViewById(R.id.vaccineBrands);
 
         final Provider provider = providerList.get(position);
         name.setText(provider.getName());
         address.setText(provider.getAddress());
-        brands.setText(provider.getBrand());
-
+        StringBuilder brandList = new StringBuilder();
+        brandList.append("Carriers: ");
+        if (provider.getBrand().contains("Unknown")){
+            brandList.append("Unknown");
+        } else if (provider.getBrand().size() == 1) {
+            brandList.append(provider.getBrand().get(0));
+        } else {
+            for (int i = 0; i < provider.getBrand().size(); i++){
+                if (i == provider.getBrand().size() - 1) {
+                    brandList.append(provider.getBrand().get(i));
+                } else {
+                    brandList.append(provider.getBrand().get(i) + ", ");
+                }
+            }
+        }
+        brands.setText(brandList.toString());
+        StringBuilder cityStateZip = new StringBuilder();
+        cityStateZip.append(provider.getCityState());        ;
+        cityStateZip.append(" ");
+        cityStateZip.append(provider.getPostalCode());
+        cityState.setText(cityStateZip.toString());
         // Add Map View later.
 
         return convertView;

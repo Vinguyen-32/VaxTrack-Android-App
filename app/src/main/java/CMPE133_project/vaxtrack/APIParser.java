@@ -114,18 +114,18 @@ public class APIParser extends AsyncTask<String, String, Void> {
                     boolean appointmentsIsNull = properties.isNull("appointments_available_all_doses");
                     if (!appointmentsIsNull){
                         if(properties.getBoolean("appointments_available_all_doses")){
-                            String brands = "";
+                            ArrayList<String> brands = new ArrayList<>();
                             if(properties.getJSONObject("appointment_vaccine_types").has("moderna")) {
-                                brands += "Moderna ";
+                                brands.add("Moderna");
                             }
                             if(properties.getJSONObject("appointment_vaccine_types").has("jj")){
-                                brands += "Johnson & Johnson ";
+                                brands.add("Johnson & Johnson");
                             }
                             if(properties.getJSONObject("appointment_vaccine_types").has("pfizer")){
-                                brands += "Pfizer ";
+                                brands.add("Pfizer");
                             }
-                            if(brands.equals("")){
-                                brands = "Unknown";
+                            if(brands.isEmpty()){
+                                brands.add("Unknown");
                             }
                             // Create the Provider class to represent the location.
                             Provider provider = new Provider();
@@ -133,6 +133,8 @@ public class APIParser extends AsyncTask<String, String, Void> {
                             provider.setAddress(properties.getString("address"));
                             provider.setLocation(providerLocation);
                             provider.setBrand(brands);
+                            provider.setCityState(properties.getString("city") + " " + properties.getString("state"));
+                            provider.setPostalCode(properties.getInt("postal_code"));
                             providers.add(provider);
                             System.out.println("Done with provider " + i);
                         }

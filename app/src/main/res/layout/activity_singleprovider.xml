@@ -10,7 +10,7 @@
         android:textColor="@color/black"
         android:layout_marginTop="@dimen/info_margin"
         android:layout_marginStart="20dp"
-        android:layout_width="200dp"
+        android:layout_width="350dp"
         android:layout_height="30dp"
         />
     <TextView
@@ -20,7 +20,17 @@
         android:layout_marginTop="10dp"
         android:layout_marginStart="20dp"
         android:layout_below="@+id/providerName"
-        android:layout_width="200dp"
+        android:layout_width="350dp"
+        android:layout_height="30dp"
+        />
+    <TextView
+        android:id="@+id/providerCityState"
+        android:text=""
+        android:textColor="@color/black"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_below="@+id/providerAddress"
+        android:layout_width="350dp"
         android:layout_height="30dp"
         />
     <TextView
@@ -29,7 +39,7 @@
         android:textColor="@color/black"
         android:layout_marginTop="10dp"
         android:layout_marginStart="20dp"
-        android:layout_below="@+id/providerAddress"
+        android:layout_below="@+id/providerCityState"
         android:layout_width="350dp"
         android:layout_height="30dp"
         />
