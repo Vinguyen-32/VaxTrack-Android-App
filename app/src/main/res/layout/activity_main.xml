@@ -13,7 +13,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:text="Please upload your ID or DL" />
+        android:layout_margin="10dp"
+        android:text="Please upload your ID or DL"
+        android:textAlignment="center"
+        android:textSize="18sp" />
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -4,12 +4,13 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
+
 import android.app.AlertDialog;
-import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -20,11 +21,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+//import org.apache.commons.io.IOUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -52,6 +57,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.drawable.logo_small);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
 
         selectBtn = findViewById(R.id.image_selector);
         submitBtn = findViewById(R.id.imgSubmitBtn);
@@ -101,7 +110,6 @@ public class MainActivity extends AppCompatActivity {
                                 System.out.println(responseHeaders.name(i) + ": " + responseHeaders.value(i));
                             }
 
-//                            System.out.println(responseBody.string());
                             JSONObject result = new JSONObject(responseBody.string());
 
                             Intent intent = new Intent(MainActivity.this, ConfirmInfoActivity.class);
@@ -139,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
                         Intent intent = new Intent();
                         intent.setType("image/*");
                         intent.setAction(Intent.ACTION_GET_CONTENT);
-                        startActivityForResult(Intent.createChooser(intent, "Select Picture"), 45);
+                        startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_IMAGE_ACTIVITY_REQUEST_CODE);
                     }
                 });
 
@@ -185,7 +193,34 @@ public class MainActivity extends AppCompatActivity {
         else if (requestCode == SELECT_IMAGE_ACTIVITY_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
                 // by this point we have the camera photo on disk
-                Bitmap takenImage = BitmapFactory.decodeFile(data.getData().getPath());
+//                Bitmap takenImage = BitmapFactory.decodeFile(data.getData().getPath());
+                Rect rect = new Rect(0, 0, 0, 0);
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                options.inJustDecodeBounds = true;
+                Bitmap takenImage = null; //HERE AGAIN
+                try {
+                    InputStream in = getContentResolver().openInputStream(data.getData());
+//                    takenImage = BitmapFactory.decodeStream(in);
+
+                    File tempFile = File.createTempFile("asdasdasd", ".png");
+                    tempFile.deleteOnExit();
+                    FileOutputStream out = new FileOutputStream(tempFile);
+                    byte[] buffer = new byte[1024];
+                    int len;
+                    while ((len = in.read(buffer)) != -1) {
+                        out.write(buffer, 0, len);
+                    }
+                    takenImage = BitmapFactory.decodeFile(tempFile.getAbsolutePath());
+//                    out.write(in.);
+//                    IOUtils.copy(in, out);
+
+                    photoFile = tempFile;
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
                 // RESIZE BITMAP, see section below
                 // Load the taken image into a preview
                 ivPostImage.setImageBitmap(takenImage);

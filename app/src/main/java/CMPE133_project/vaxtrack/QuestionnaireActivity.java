@@ -12,17 +12,55 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 
 public class QuestionnaireActivity extends AppCompatActivity {
+    private int selectPosition;
+    private CheckBox checkBox;
+    private RadioGroup radioGroup;
+    private Button confirmBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questionnaire);
 
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.drawable.logo_small);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+
         Button selectBtn = findViewById(R.id.image_selector);
         Button cancelBtn = findViewById(R.id.btnCancel);
+
+        radioGroup = findViewById(R.id.radioButtonGroup);
+        confirmBtn = findViewById(R.id.btnConfirmEligibility);
+
+        Spinner dropdown = findViewById(R.id.spinner1);
+        View employerLayout = findViewById(R.id.employerLayout);
+        View uploadLayout = findViewById(R.id.uploadLayout);
+
+        dropdown.setVisibility(View.GONE);
+        employerLayout.setVisibility(View.GONE);
+        uploadLayout.setVisibility(View.GONE);
+
+        confirmBtn.setEnabled(false);
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                int state = checkedId == R.id.radioButton2 ? View.VISIBLE : View.GONE;
+                dropdown.setVisibility(state);
+                employerLayout.setVisibility(state);
+                uploadLayout.setVisibility(state);
+                processSelection();
+            }
+        });
+
+        checkBox = findViewById(R.id.checkBox);
+        selectPosition = 0;
 
         selectBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -39,7 +77,6 @@ public class QuestionnaireActivity extends AppCompatActivity {
         });
 
         //get the spinner from the xml.
-        Spinner dropdown = findViewById(R.id.spinner1);
         //create a list of items for the spinner.
         String[] items = new String[]{
                 "Select",
@@ -53,7 +90,7 @@ public class QuestionnaireActivity extends AppCompatActivity {
                 "Long-term care or congregate care staff",
                 "Long-term care or congregate care resident",
                 "Food and agriculture worker",
-                "None of the above"
+//                "None of the above"
         };
         //create an adapter to describe how the items are displayed, adapters are used in several places in android.
         //There are multiple variations of this, but this is the basic variant.
@@ -69,12 +106,37 @@ public class QuestionnaireActivity extends AppCompatActivity {
                 Button btn = findViewById(R.id.btnConfirmEligibility);
                 uploadLayout.setVisibility(position == 0 || position == items.length - 1 ? View.GONE : View.VISIBLE);
                 employerLayout.setVisibility(position == 0 || position == items.length - 1 ? View.GONE : View.VISIBLE);
-                btn.setEnabled(position != 0);
+//                btn.setEnabled(position != 0);
+                selectPosition = position;
+
+                processSelection();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
+
+        checkBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                processSelection();
+            }
+        });
+
+        confirmBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = getIntent();
+                Intent intentContinue = new Intent(QuestionnaireActivity.this, EligibleConfirmActivity.class);
+
+                intentContinue.putExtra("id", intent.getStringExtra("id"));
+                intentContinue.putExtra("name", intent.getStringExtra("name"));
+                intentContinue.putExtra("dob", intent.getStringExtra("dob"));
+                intentContinue.putExtra("address", intent.getStringExtra("address"));
+                intentContinue.putExtra("vaccineData", intent.getStringExtra("vaccineData"));
+                startActivity(intentContinue);
             }
         });
     }
@@ -110,5 +172,17 @@ public class QuestionnaireActivity extends AppCompatActivity {
 
         AlertDialog alert11 = alertDialog.create();
         alert11.show();
+    }
+
+    private void processSelection(){
+        boolean enabled =
+            checkBox.isChecked() &&
+            (
+                (radioGroup.getCheckedRadioButtonId() == R.id.radioButton2 && selectPosition != 0) ||
+                radioGroup.getCheckedRadioButtonId() != R.id.radioButton2
+            );
+
+        Button btn = findViewById(R.id.btnConfirmEligibility);
+        btn.setEnabled(enabled);
     }
 }

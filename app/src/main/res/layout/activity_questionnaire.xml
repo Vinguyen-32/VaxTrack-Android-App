@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -27,6 +28,7 @@
                     android:text="Which group applies?" />
 
                 <RadioGroup
+                    android:id="@+id/radioButtonGroup"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -35,6 +37,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
+                        android:checked="true"
                         android:text="Age 16 or over with medical conditions that increase risk of severe illness from COVID-19" />
 
                     <RadioButton
@@ -51,37 +54,39 @@
                         android:layout_margin="10dp"
                         android:text="None of the above" />
 
+                    <Spinner
+                        android:id="@+id/spinner1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:background="@android:drawable/btn_dropdown"
+                        android:spinnerMode="dropdown"
+                        tools:visibility="visible" />
+
+                    <LinearLayout
+                        android:id="@+id/employerLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvEmployerConfirm"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:text="Who is your employer?" />
+
+                        <EditText
+                            android:id="@+id/etEmployerAnswer"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:hint="Please type your answer here"
+                            android:inputType="textPersonName" />
+                    </LinearLayout>
+
                 </RadioGroup>
-
-                <Spinner
-                    android:id="@+id/spinner1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:background="@android:drawable/btn_dropdown"
-                    android:spinnerMode="dropdown" />
-
-                <LinearLayout
-                    android:id="@+id/employerLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="10dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/tvEmployerConfirm"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Who is your employer?" />
-
-                    <EditText
-                        android:id="@+id/etEmployerAnswer"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:hint="Please type your answer here"
-                        android:inputType="textPersonName" />
-                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/uploadLayout"

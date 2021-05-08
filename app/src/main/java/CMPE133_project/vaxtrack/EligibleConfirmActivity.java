@@ -21,7 +21,11 @@ import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.TextView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
+import java.util.Date;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -37,11 +41,27 @@ public class EligibleConfirmActivity extends AppCompatActivity {
     private LocationManager mLocationManager;
     private double longitude;
     private double latitude;
+    private String vaccineData;
+    private String id;
+    private String name;
+    private String dob;
+    private String address;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_eligible_confirm);
+
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.drawable.logo_small);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+
+        Intent intent = getIntent();
+        id = intent.getStringExtra("id");
+        name = intent.getStringExtra("name");
+        dob = intent.getStringExtra("dob");
+        address = intent.getStringExtra("address");
+        vaccineData = intent.getStringExtra("vaccineData");
 
         mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
@@ -111,8 +131,8 @@ public class EligibleConfirmActivity extends AppCompatActivity {
                 final MediaType JSON = MediaType.get("application/json; charset=utf-8");
 
                 OkHttpClient client = new OkHttpClient();
-                    String json = "{\"location\":{\"lat\":37.296177,\"lng\":-121.847534},\"vaccineData\":\"WyJhM3F0MDAwMDAwMEN5SkJBQTAiLCJhM3F0MDAwMDAwMEN5SkdBQTAiLCJhM3F0MDAwMDAwMDFBZExBQVUiLCJhM3F0MDAwMDAwMDFBZE1BQVUiLCJhM3F0MDAwMDAwMDFBc2FBQUUiLCJhM3F0MDAwMDAwMDFBZ1VBQVUiLCJhM3F0MDAwMDAwMDFBZ1ZBQVUiXQ==\"}";
-                    String url = "http://192.168.1.28:3000/api/v1.0/search";
+                    String json = "{\"location\":{\"lat\":" + latitude + ",\"lng\":" + longitude + "},\"vaccineData\":\"" + vaccineData + "\"}";
+                    String url = getString(R.string.backend_url) + "/api/v1.0/search";
                     RequestBody body = RequestBody.create(JSON, json);
                     Request request = new Request.Builder()
                             .url(url)
@@ -129,12 +149,15 @@ public class EligibleConfirmActivity extends AppCompatActivity {
                         try (ResponseBody responseBody = response.body()) {
                             if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
 
-                            Headers responseHeaders = response.headers();
-                            for (int i = 0, size = responseHeaders.size(); i < size; i++) {
-                                System.out.println(responseHeaders.name(i) + ": " + responseHeaders.value(i));
-                            }
+                            JSONObject result = new JSONObject(responseBody.string());
 
-                            System.out.println(responseBody.string());
+                            Intent intentContinue = new Intent(EligibleConfirmActivity.this, AppointmentActivity.class);
+
+                            intentContinue.putExtra("locations", result.getJSONArray("locations").toString());
+                            startActivity(intentContinue);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
                     }
                 });
