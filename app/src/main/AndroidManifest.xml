@@ -30,10 +30,23 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.VaxTrack"
         android:usesCleartextTraffic="true">
-        <activity android:name=".HealthInfo"></activity>
+        <activity android:name=".Detailfirst"></activity>
+        <activity android:name=".Time" />
+        <activity android:name=".Location" />
+        <activity android:name=".detaillast" />
+        <activity android:name=".detailsecond" />
+        <activity android:name=".detailthird" />
+        <activity android:name=".Home" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".HealthInfo" />
         <activity
             android:name=".PersonalInfo"
-            android:exported="true"></activity>
+            android:exported="true" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -48,19 +61,16 @@
         <activity android:name=".EligibleConfirmActivity" />
         <activity android:name=".QuestionnaireActivity" />
         <activity android:name=".ConfirmInfoActivity" />
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".MainActivity"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity android:name=".AvailableVaccineActivity">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
     </application>
 
