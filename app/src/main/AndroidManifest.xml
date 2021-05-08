@@ -41,6 +41,12 @@
         </activity>
         <activity android:name=".AppointmentActivity" />
 
+        <activity android:name=".HealthInfo"></activity>
+        <activity
+            android:name=".PersonalInfo"
+            android:exported="true">
+        </activity>
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.cmpe133.fileprovider"
@@ -56,6 +62,13 @@
         <activity android:name=".ConfirmInfoActivity" />
         <activity android:name=".MainActivity">
 
+        </activity>
+        <activity android:name=".AvailableVaccineActivity">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
     </application>
 
