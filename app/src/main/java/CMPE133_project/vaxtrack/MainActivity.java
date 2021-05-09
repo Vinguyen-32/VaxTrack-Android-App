@@ -61,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setLogo(R.drawable.logo_small);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
-
         selectBtn = findViewById(R.id.image_selector);
         submitBtn = findViewById(R.id.imgSubmitBtn);
 

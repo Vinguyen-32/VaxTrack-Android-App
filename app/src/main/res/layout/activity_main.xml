@@ -4,63 +4,182 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/tvUpload"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_alignParentStart="true"-->
+    <!--        android:layout_alignParentTop="true"-->
+    <!--        android:layout_margin="10dp"-->
+    <!--        android:text="Please upload your ID or DL"-->
+    <!--        android:textAlignment="center"-->
+    <!--        android:textSize="18sp" />-->
+
+    <!--    <LinearLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:gravity="bottom|end"-->
+    <!--        android:orientation="vertical">-->
+
+    <!--        <ImageView-->
+    <!--            android:id="@+id/ivPostImage"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="346dp"-->
+    <!--            tools:srcCompat="@tools:sample/avatars" />-->
+
+    <!--        <LinearLayout-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:gravity="center_horizontal"-->
+    <!--            android:orientation="horizontal">-->
+
+    <!--            <Button-->
+    <!--                android:id="@+id/image_selector"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:background="@android:color/transparent"-->
+    <!--                android:drawableTop="@drawable/upload_icon2"-->
+    <!--                android:drawablePadding="10dp"-->
+    <!--                android:text="Upload Photo"-->
+    <!--                android:textColor="@android:color/black" />-->
+    <!--        </LinearLayout>-->
+
+    <!--        <LinearLayout-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:orientation="horizontal">-->
+
+    <!--            <Button-->
+    <!--                android:id="@+id/imgSubmitBtn"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_margin="20dp"-->
+    <!--                android:layout_weight="1"-->
+    <!--                android:enabled="false"-->
+    <!--                android:text="Submit" />-->
+    <!--        </LinearLayout>-->
+    <!--    </LinearLayout>-->
+
+
+    <!--    <androidx.cardview.widget.CardView-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="400dp"-->
+    <!--        app:cardBackgroundColor="#efc849">-->
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp"
+        app:srcCompat="@drawable/icons_upload" />
+
     <TextView
-        android:id="@+id/tvUpload"
+        android:id="@+id/textView11"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_margin="10dp"
-        android:text="Please upload your ID or DL"
+        android:fontFamily="sans-serif"
+        android:text="You need to Upload your"
         android:textAlignment="center"
+        android:textColor="#FFFFFF"
         android:textSize="18sp" />
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/textView15"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="bottom|end"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:text="Driving License"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="34sp" />
 
-        <ImageView
-            android:id="@+id/ivPostImage"
-            android:layout_width="match_parent"
-            android:layout_height="346dp"
-            tools:srcCompat="@tools:sample/avatars" />
+    <Button
+        android:id="@+id/button6"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/custom_rounded_corners"
+        android:drawableLeft="@drawable/image"
+        android:fontFamily="sans-serif"
+        android:text="Use Camera"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="sans-serif"
+        android:text="or"
+        android:textAlignment="center"
+        android:textSize="16sp" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_margin="20dp"
+        app:cardBackgroundColor="@color/white_200">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
+            android:layout_height="match_parent"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/image_selector"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:drawableTop="@drawable/upload_icon2"
-                android:drawablePadding="10dp"
-                android:text="Upload Photo"
-                android:textColor="@android:color/black" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/imgSubmitBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="120dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:enabled="false"
-                android:text="Submit" />
+                app:srcCompat="@drawable/image_icon" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView17"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="sans-serif"
+                    android:text="Select the documents from Gallery"
+                    android:textColor="#000000"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView18"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="sans-serif"
+                    android:text="PNG, JPEG, or PDF"
+                    android:textColor="#000000" />
+            </LinearLayout>
+
         </LinearLayout>
-    </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!--    </androidx.cardview.widget.CardView>-->
+
+    <!--    <androidx.cardview.widget.CardView-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:layout_marginTop="-50dp"-->
+    <!--        android:layout_marginBottom="-50dp"-->
+    <!--        app:cardCornerRadius="50dp" />-->
 
 </LinearLayout>

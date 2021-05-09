@@ -26,12 +26,14 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:logo="@drawable/logo_small"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.VaxTrack"
-        android:logo="@drawable/logo_small"
         android:usesCleartextTraffic="true">
-        <activity android:name=".WelcomeActivity"
+        <activity android:name=".ServicesActivity"></activity>
+        <activity
+            android:name=".SplashScreenActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,13 +41,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AppointmentActivity" />
+        <activity
+            android:name=".WelcomeActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
-        <activity android:name=".HealthInfo"></activity>
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity android:name=".AppointmentActivity" />
+        <activity android:name=".HealthInfo" />
         <activity
             android:name=".PersonalInfo"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -60,16 +71,20 @@
         <activity android:name=".EligibleConfirmActivity" />
         <activity android:name=".QuestionnaireActivity" />
         <activity android:name=".ConfirmInfoActivity" />
-        <activity android:name=".MainActivity">
-
-        </activity>
+        <activity android:name=".MainActivity" />
         <activity android:name=".AvailableVaccineActivity">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

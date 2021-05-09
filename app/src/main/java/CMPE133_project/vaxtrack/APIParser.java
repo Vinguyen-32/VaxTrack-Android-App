@@ -25,7 +25,7 @@ import java.util.List;
 
 public class APIParser extends AsyncTask<String, String, Void> {
 
-    private String apiUrl = "https://www.vaccinespotter.org/api/v0/states/WY.json";
+    private String apiUrl = "https://www.vaccinespotter.org/api/v0/states/CA.json";
     // private ListView listView;
     // private double[] locationService;
     // For parsing data
