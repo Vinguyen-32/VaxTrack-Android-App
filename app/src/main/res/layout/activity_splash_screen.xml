@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:fontFamily="@font/antic"
-        android:text="Nationwide Vaccine Tracker App"
+        android:text="California COVID-19 Vaccine Tracker App"
         android:textAlignment="center"
         android:textColor="#2DB7D1"
         android:textSize="18sp"

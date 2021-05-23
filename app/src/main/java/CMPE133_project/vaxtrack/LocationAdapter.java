@@ -43,6 +43,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
         TextView tvAddress;
         TextView tvName;
         TextView tvDistance;
+        TextView tvUrl;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -50,12 +51,14 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
             tvAddress = itemView.findViewById(R.id.tvAddress);
             tvName = itemView.findViewById(R.id.tvName);
             tvDistance = itemView.findViewById(R.id.tvDistance);
+            tvUrl = itemView.findViewById(R.id.tvUrl);
         }
 
         public void bind(Location location) {
             tvAddress.setText(location.getAddress());
             tvName.setText(location.getName());
-            tvDistance.setText(location.getDistance());
+            tvDistance.setText(String.format("%.2f",Double.parseDouble(location.getDistance()) / 1000) + " miles");
+            tvUrl.setText(location.getUrl());
         }
     }
 }

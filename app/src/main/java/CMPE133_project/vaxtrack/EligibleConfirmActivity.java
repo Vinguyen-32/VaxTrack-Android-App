@@ -15,11 +15,14 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.TextView;
+
+import com.google.android.material.textfield.TextInputLayout;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -56,6 +59,8 @@ public class EligibleConfirmActivity extends AppCompatActivity {
         getSupportActionBar().setLogo(R.drawable.logo_small);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
         name = intent.getStringExtra("name");
@@ -64,6 +69,7 @@ public class EligibleConfirmActivity extends AppCompatActivity {
         vaccineData = intent.getStringExtra("vaccineData");
 
         mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
 
         SearchView svSearchLocation = findViewById(R.id.svSearchLocation);
         TextView tvCurrentLocation = findViewById(R.id.tvCurrentLocation);
@@ -76,7 +82,7 @@ public class EligibleConfirmActivity extends AppCompatActivity {
         btnCan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentBack = new Intent(EligibleConfirmActivity.this, QuestionnaireActivity.class);
+                Intent intentBack = new Intent(EligibleConfirmActivity.this, ServicesActivity.class);
                 startActivity(intentBack);
             }
         });
@@ -163,5 +169,15 @@ public class EligibleConfirmActivity extends AppCompatActivity {
                 });
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

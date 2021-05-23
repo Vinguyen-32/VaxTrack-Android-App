@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -15,17 +16,35 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
+            <ImageView
+                android:id="@+id/imageView13"
+                android:layout_width="wrap_content"
+                android:layout_height="220dp"
+                app:srcCompat="@drawable/questionnaire_icon" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_margin="10dp"
                 android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView39"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:text="Your age is not eligible for COVID-19 Vaccine at this time!"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvQuestion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:text="Which group applies?" />
+                    android:text="Which one of these groups applies to you?" />
 
                 <RadioGroup
                     android:id="@+id/radioButtonGroup"
@@ -63,55 +82,55 @@
                         android:spinnerMode="dropdown"
                         tools:visibility="visible" />
 
-                    <LinearLayout
-                        android:id="@+id/employerLayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="10dp"
-                        android:orientation="vertical">
+<!--                    <LinearLayout-->
+<!--                        android:id="@+id/employerLayout"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:layout_margin="10dp"-->
+<!--                        android:orientation="vertical">-->
 
-                        <TextView
-                            android:id="@+id/tvEmployerConfirm"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:text="Who is your employer?" />
+<!--                        <TextView-->
+<!--                            android:id="@+id/tvEmployerConfirm"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_margin="5dp"-->
+<!--                            android:text="Who is your employer?" />-->
 
-                        <EditText
-                            android:id="@+id/etEmployerAnswer"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:ems="10"
-                            android:hint="Please type your answer here"
-                            android:inputType="textPersonName" />
-                    </LinearLayout>
+<!--                        <EditText-->
+<!--                            android:id="@+id/etEmployerAnswer"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:ems="10"-->
+<!--                            android:hint="Please type your answer here"-->
+<!--                            android:inputType="textPersonName" />-->
+<!--                    </LinearLayout>-->
 
                 </RadioGroup>
 
-                <LinearLayout
-                    android:id="@+id/uploadLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:orientation="vertical">
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/uploadLayout"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="10dp"-->
+<!--                    android:orientation="vertical">-->
 
-                    <TextView
-                        android:id="@+id/textView3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Please show your proof of employment (paystub)" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/textView3"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Please show your proof of employment (paystub)" />-->
 
-                    <Button
-                        android:id="@+id/image_selector"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:background="@android:color/transparent"
-                        android:drawableTop="@drawable/upload_icon2"
-                        android:drawablePadding="10dp"
-                        android:text="Upload Photo"
-                        android:textColor="@android:color/black" />
-                </LinearLayout>
+<!--                    <Button-->
+<!--                        android:id="@+id/image_selector"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center_horizontal"-->
+<!--                        android:background="@android:color/transparent"-->
+<!--                        android:drawableTop="@drawable/upload_icon2"-->
+<!--                        android:drawablePadding="10dp"-->
+<!--                        android:text="Upload Photo"-->
+<!--                        android:textColor="@android:color/black" />-->
+<!--                </LinearLayout>-->
 
                 <LinearLayout
                     android:layout_width="match_parent"

@@ -76,7 +76,7 @@
         android:layout_width="170dp"
         android:layout_height="170dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         app:srcCompat="@drawable/icons_upload" />
 
     <TextView
@@ -100,10 +100,10 @@
         android:textSize="34sp" />
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/btnCamera"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="80dp"
         android:background="@drawable/custom_rounded_corners"
         android:drawableLeft="@drawable/image"
         android:fontFamily="sans-serif"
@@ -116,17 +116,22 @@
         android:id="@+id/textView16"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
         android:fontFamily="sans-serif"
         android:text="or"
         android:textAlignment="center"
         android:textSize="16sp" />
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardImageSelector"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_margin="20dp"
-        app:cardBackgroundColor="@color/white_200">
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:cardBackgroundColor="@color/white_200"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -171,6 +176,7 @@
             </LinearLayout>
 
         </LinearLayout>
+
     </androidx.cardview.widget.CardView>
 
     <!--    </androidx.cardview.widget.CardView>-->

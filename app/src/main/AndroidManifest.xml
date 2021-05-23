@@ -31,33 +31,32 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.VaxTrack"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ServicesActivity"></activity>
+        <activity android:name=".NotEligibleConfirmActivity"></activity>
+        <activity android:name=".PastHealthCheckActivity" />
+        <activity android:name=".ServicesActivity" />
         <activity
             android:name=".SplashScreenActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+             <intent-filter>
+             <action android:name="android.intent.action.MAIN" />
+
+
+             <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>
         </activity>
         <activity
             android:name=".WelcomeActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
+<!--             <intent-filter>-->
+<!--             <action android:name="android.intent.action.MAIN" />-->
 
 
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
+<!--             <category android:name="android.intent.category.LAUNCHER" />-->
+<!--             </intent-filter>-->
         </activity>
-        <activity android:name=".AppointmentActivity" />
-
-        <activity android:name=".HealthInfo"></activity>
-        <activity
-            android:name=".PersonalInfo"
-            android:exported="true">
+        <activity android:name=".AppointmentActivity" >
         </activity>
 
         <provider
@@ -70,21 +69,21 @@
                 android:resource="@xml/fileprovider" />
         </provider>
 
-        <activity android:name=".EligibleConfirmActivity" />
-        <activity android:name=".QuestionnaireActivity" />
-        <activity android:name=".ConfirmInfoActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".AvailableVaccineActivity">
+        <activity android:name=".EligibleConfirmActivity">
 <!--            <intent-filter>-->
 <!--                <action android:name="android.intent.action.MAIN" />-->
 
 <!--                <category android:name="android.intent.category.LAUNCHER" />-->
 <!--            </intent-filter>-->
         </activity>
+        <activity android:name=".QuestionnaireActivity" />
+        <activity android:name=".ConfirmInfoActivity" />
+        <activity android:name=".MainActivity" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyAGPrLRfUP2TuiYzHKDNjQVTktVmYoVDMM"/>
     </application>
 
 </manifest>

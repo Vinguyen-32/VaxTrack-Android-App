@@ -65,7 +65,7 @@ public class ConfirmInfoActivity extends AppCompatActivity {
         btnContinue = findViewById(R.id.btnContinue);
         etDob = findViewById(R.id.etDob);
         etLastName = findViewById(R.id.etLastName);
-        etFirstName = findViewById(R.id.etFirstName);
+        etFirstName = findViewById(R.id.svSearchLocation);
         etAddress = findViewById(R.id.etAddress);
 
         String[] nameParts = name.split(" ");
@@ -85,64 +85,12 @@ public class ConfirmInfoActivity extends AppCompatActivity {
         btnContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String dateString = etDob.getText().toString();
-                int year = Integer.parseInt(dateString.substring(dateString.length() - 4));
-
-                String json = "{\"firstName\":\"" + etFirstName.getText() + "\", \"lastName\":\"" + etLastName.getText() + "\", \"address\": \"" + etAddress.getText() + "\", \"dob\": \"" + etDob.getText() + "\"}";
-                String url = getString(R.string.backend_url) + "/api/v1.0/eligibility";
-                RequestBody body = RequestBody.create(JSON, json);
-                Request request = new Request.Builder()
-                        .url(url)
-                        .post(body)
-                        .build();
-
-                Handler mHandler = new Handler(Looper.getMainLooper()) {
-                    @Override
-                    public void handleMessage(Message message) {
-                        // This is where you do your work in the UI thread.
-                        // Your worker tells you in the message what to do.
-                        Toast.makeText(getApplicationContext(), "Not Eligible", Toast.LENGTH_SHORT).show();
-                    }
-                };
-
-                client.newCall(request).enqueue(new Callback() {
-                    @Override public void onFailure(Call call, IOException e) {
-                        e.printStackTrace();
-                    }
-
-                    @Override public void onResponse(Call call, Response response) throws IOException {
-                        try (ResponseBody responseBody = response.body()) {
-                            if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
-
-                            JSONObject result = new JSONObject(responseBody.string());
-                            boolean eligible = result.getBoolean("eligible");
-                            String vaccineData = result.getString("vaccineData");
-
-                            if (eligible) {
-                                Intent intentContinue;
-                                if ((new Date()).getYear() + 1900 - year >= 65) {
-                                    intentContinue = new Intent(ConfirmInfoActivity.this, EligibleConfirmActivity.class);
-                                } else {
-                                    intentContinue = new Intent(ConfirmInfoActivity.this, QuestionnaireActivity.class);
-                                }
-
-                                intentContinue.putExtra("id", id);
-                                intentContinue.putExtra("name", name);
-                                intentContinue.putExtra("dob", dob);
-                                intentContinue.putExtra("address", address);
-                                intentContinue.putExtra("vaccineData", vaccineData);
-                                startActivity(intentContinue);
-                            }
-                            else {
-                                // Communicate with UI thread
-                                Message message = mHandler.obtainMessage(1, null);
-                                message.sendToTarget();
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
+                Intent intent = new Intent(ConfirmInfoActivity.this, PastHealthCheckActivity.class);
+                intent.putExtra("firstName", etFirstName.getText().toString());
+                intent.putExtra("lastName", etLastName.getText().toString());
+                intent.putExtra("dob", etDob.getText().toString());
+                intent.putExtra("address", etAddress.getText().toString());
+                startActivity(intent);
             }
         });
     }
